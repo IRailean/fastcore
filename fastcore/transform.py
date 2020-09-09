@@ -84,7 +84,7 @@ class Transform(metaclass=_TfmMeta):
             print("In Transform: self setups is null")
         else:
             print("In Transform: self.setups: ", self.setups)
-            
+
         return self.setups(getattr(items, 'train', items) if train_setup else items)
 
     def _call(self, fn, x, split_idx=None, **kwargs):
@@ -216,6 +216,7 @@ class Pipeline:
     def add(self,t, items=None, train_setup=False):
         print("In Pipeline: in add")
         t.setup(items, train_setup)
+        print("In Pipeline: returned from setup")
         self.fs.append(t)
 
     
