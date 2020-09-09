@@ -217,6 +217,7 @@ class Pipeline:
 
     def add(self,t, items=None, train_setup=False):
         print("In Pipeline: in add")
+        print("In Pipeline: t type: ", type(t), " t ", t)
         t.setup(items, train_setup)
         print("In Pipeline: returned from setup")
         self.fs.append(t)
