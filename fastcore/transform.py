@@ -30,6 +30,7 @@ class _TfmMeta(type):
         return res
 
     def __call__(cls, *args, **kwargs):
+        print("In metaclass _TfmMeta")
         f = args[0] if args else None
         n = getattr(f,'__name__',None)
         if callable(f) and n in _tfm_methods:
