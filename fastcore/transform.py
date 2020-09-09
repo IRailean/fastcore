@@ -25,9 +25,16 @@ class _TfmMeta(type):
         print("In _TfmMeta: __new__")
         res = super().__new__(cls, name, bases, dict)
         for nm in _tfm_methods:
+            print("In _TfmMeta: nm ", nm)
             base_td = [getattr(b,nm,None) for b in bases]
-            if nm in res.__dict__: getattr(res,nm).bases = base_td
-            else: setattr(res, nm, TypeDispatch(bases=base_td))
+            print("In _TfmMeta: base_td ", base_td)
+
+            if nm in res.__dict__: 
+                print("In _TfmMeta: nm in res.__dict__ ")
+                getattr(res,nm).bases = base_td
+            else: 
+                print("In _TfmMeta: not in nm in res.__dict__ ")
+                setattr(res, nm, TypeDispatch(bases=base_td))
         res.__signature__ = inspect.signature(res.__init__)
         return res
 

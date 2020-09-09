@@ -76,7 +76,7 @@ class _TypeDict:
 class TypeDispatch:
     "Dictionary-like object; `__getitem__` matches keys of types using `issubclass`"
     def __init__(self, funcs=(), bases=()):
-        print("In TypeDispatch:")
+        print("In TypeDispatch: funcs ", funcs, " bases ", bases)
         self.funcs,self.bases = _TypeDict(),L(bases).filter(is_not(None))
         for o in L(funcs): self.add(o)
         self.inst = None
