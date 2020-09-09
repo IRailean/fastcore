@@ -173,13 +173,23 @@ def gather_attr_names(o, nm):
 class Pipeline:
     "A pipeline of composed (for encode/decode) transforms, setup with types"
     def __init__(self, funcs=None, split_idx=None):
+        print("In Pipeline")
+        print("In Pipeline: funcs: ", funcs, " split_idx: ", split_idx)
+
         self.split_idx,self.default = split_idx,None
+
         if funcs is None: funcs = []
-        if isinstance(funcs, Pipeline): self.fs = funcs.fs
+        if isinstance(funcs, Pipeline):
+            print("In Pipeline: isinstance(funcs, Pipeline)")
+            self.fs = funcs.fs
+            print("In Pipeline: isinstance(funcs, Pipeline) self.fs", self.fs)
         else:
             if isinstance(funcs, Transform): funcs = [funcs]
             self.fs = L(ifnone(funcs,[noop])).map(mk_transform).sorted(key='order')
+            print("In Pipeline: self.fs", self.fs)
+
         for f in self.fs:
+            print("In Pipeline: f", f)
             name = camel2snake(type(f).__name__)
             a = getattr(self,name,None)
             if a is not None: f = L(a)+f
@@ -193,6 +203,10 @@ class Pipeline:
     def add(self,t, items=None, train_setup=False):
         t.setup(items, train_setup)
         self.fs.append(t)
+
+    
+
+        
 
     def __call__(self, o): return compose_tfms(o, tfms=self.fs, split_idx=self.split_idx)
     def __repr__(self): return f"Pipeline: {' -> '.join([f.name for f in self.fs if f.name != 'noop'])}"
