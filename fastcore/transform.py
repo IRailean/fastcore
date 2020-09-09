@@ -14,6 +14,7 @@ _tfm_methods = 'encodes','decodes','setups'
 
 class _TfmDict(dict):
     def __setitem__(self,k,v):
+        print("In _TfmDict: __setitem__")
         if k not in _tfm_methods or not callable(v): return super().__setitem__(k,v)
         if k not in self: super().__setitem__(k,TypeDispatch())
         self[k].add(v)
@@ -21,6 +22,7 @@ class _TfmDict(dict):
 # Cell
 class _TfmMeta(type):
     def __new__(cls, name, bases, dict):
+        print("In _TfmMeta: __new__")
         res = super().__new__(cls, name, bases, dict)
         for nm in _tfm_methods:
             base_td = [getattr(b,nm,None) for b in bases]
