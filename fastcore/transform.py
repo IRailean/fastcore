@@ -45,6 +45,7 @@ class _TfmMeta(type):
         n = getattr(f,'__name__',None)
         print("In metaclass _TfmMeta n", n)
         if callable(f) and n in _tfm_methods:
+            print("In metaclass _TfmMeta callable(f) and n in _tfm_methods")
             getattr(cls,n).add(f)
             return f
         return super().__call__(*args, **kwargs)
@@ -205,9 +206,12 @@ class Pipeline:
             self.fs = funcs.fs
             print("In Pipeline: isinstance(funcs, Pipeline) self.fs", self.fs)
         else:
+            print("In Pipeline: not isinstance(funcs, Pipeline)")
             if isinstance(funcs, Transform): funcs = [funcs]
             self.fs = L(ifnone(funcs,[noop])).map(mk_transform).sorted(key='order')
             print("In Pipeline: self.fs", self.fs)
+            for f in self.fs:
+                print("In Pipeline: f in self.fs type: ", type(f), " f ", f)
 
         for f in self.fs:
             print("In Pipeline: f", f)
