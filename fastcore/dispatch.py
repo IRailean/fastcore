@@ -105,6 +105,7 @@ class TypeDispatch:
         return '\n'.join(r)
 
     def __call__(self, *args, **kwargs):
+        print("In TypeDispatch: __call__")
         ts = L(args).map(type)[:2]
         f = self[tuple(ts)]
         if not f: return args[0]
