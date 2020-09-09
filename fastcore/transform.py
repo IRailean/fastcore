@@ -196,11 +196,15 @@ class Pipeline:
             setattr(self, name, f)
 
     def setup(self, items=None, train_setup=False):
+        print("In Pipeline: in setup")
         tfms = self.fs[:]
+        print("In Pipeline: in setup: tfms ", tfms)
         self.fs.clear()
         for t in tfms: self.add(t,items, train_setup)
+        print("In Pipeline: in setup self.fs", self.fs)
 
     def add(self,t, items=None, train_setup=False):
+        print("In Pipeline: in add")
         t.setup(items, train_setup)
         self.fs.append(t)
 
