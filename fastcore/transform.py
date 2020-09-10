@@ -72,6 +72,7 @@ class Transform(metaclass=_TfmMeta):
         self.init_enc = enc or dec
         if not self.init_enc: return
 
+        print("In Transform: about to TypeDispatch encodes, decodes, setups")
         self.encodes,self.decodes,self.setups = TypeDispatch(),TypeDispatch(),TypeDispatch()
         if enc:
             self.encodes.add(enc)
@@ -85,7 +86,9 @@ class Transform(metaclass=_TfmMeta):
     def __call__(self, x, **kwargs): 
         print("In Tranfsorm: __call__")
         return self._call('encodes', x, **kwargs)
-    def decode  (self, x, **kwargs): return self._call('decodes', x, **kwargs)
+    def decode  (self, x, **kwargs): 
+        print("In Tranfsorm: decode")
+        return self._call('decodes', x, **kwargs)
     def __repr__(self): 
         print("I`m Transform")
         return f'{self.name}:\nencodes: {self.encodes}decodes: {self.decodes}'
