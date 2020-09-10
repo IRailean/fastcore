@@ -90,7 +90,6 @@ class Transform(metaclass=_TfmMeta):
         print("In Tranfsorm: decode")
         return self._call('decodes', x, **kwargs)
     def __repr__(self): 
-        print("I`m Transform")
         return f'{self.name}:\nencodes: {self.encodes}decodes: {self.decodes}'
 
     def setup(self, items=None, train_setup=False):
@@ -203,7 +202,6 @@ class Pipeline:
         if isinstance(funcs, Pipeline):
             print("In Pipeline: isinstance(funcs, Pipeline)")
             self.fs = funcs.fs
-            print("In Pipeline: isinstance(funcs, Pipeline) self.fs", self.fs)
         else:
             print("In Pipeline: not isinstance(funcs, Pipeline)")
             if isinstance(funcs, Transform): funcs = [funcs]
@@ -225,7 +223,6 @@ class Pipeline:
         print("In Pipeline: in setup: tfms ", tfms)
         self.fs.clear()
         for t in tfms: self.add(t,items, train_setup)
-        print("In Pipeline: in setup self.fs", self.fs)
 
     def add(self,t, items=None, train_setup=False):
         print("In Pipeline: in add")
