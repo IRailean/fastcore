@@ -48,7 +48,9 @@ class NewChkMeta(FixSigMeta):
             x._newchk = 1
             return x
         print("In NewChkMeta: cls is ", cls, " x is ", x, " args ", args, " kwargs ", kwargs)
+        print("In NewChkMeta: super ", super(), " super().__call__", super().__call__)
         res = super().__call__(*((x,) + args), **kwargs)
+        print("In NewChkMeta res ", res)
         res._newchk = 0
         return res
 

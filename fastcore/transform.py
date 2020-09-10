@@ -101,7 +101,7 @@ class Transform(metaclass=_TfmMeta):
 
 
         print("In Transform: type(items)", type(items))
-        print(" call getattr(items, 'train', items)", getattr(items, 'train', items))
+        print("call getattr(items, 'train', items)", getattr(items, 'train', items))
         print("CALL self.setups: " , self.setups(getattr(items, 'train', items) if train_setup else items))
         print("CALL FINISHED")
         raise Exception
