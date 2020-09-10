@@ -208,10 +208,10 @@ class Pipeline:
             self.fs = L(ifnone(funcs,[noop])).map(mk_transform).sorted(key='order')
             print("In Pipeline: self.fs", self.fs)
             for f in self.fs:
-                print("In Pipeline: f in self.fs type: ", type(f), " f ", f)
+                print("In Pipeline: f in self.fs type: ", type(f), " f ", f.name)
 
         for f in self.fs:
-            print("In Pipeline: f", f)
+            print("In Pipeline: f", f.name)
             name = camel2snake(type(f).__name__)
             a = getattr(self,name,None)
             if a is not None: f = L(a)+f
@@ -226,7 +226,7 @@ class Pipeline:
 
     def add(self,t, items=None, train_setup=False):
         print("In Pipeline: in add")
-        print("In Pipeline: t type: ", type(t), " t ", t)
+        print("In Pipeline: t type: ", type(t), " t ", t.name)
         t.setup(items, train_setup)
         print("In Pipeline: returned from setup")
         self.fs.append(t)
