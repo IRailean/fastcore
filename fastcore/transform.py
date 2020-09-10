@@ -98,10 +98,6 @@ class Transform(metaclass=_TfmMeta):
         train_setup = train_setup if self.train_setup is None else self.train_setup
         print("In Transform: train_setup ", train_setup)
         print("In Transform: setup: self.setups type ", type(self.setups), " type self ", type(self))
-        if not self.setups:
-            print("In Transform: setup: self setups is null")
-        else:
-            print("In Transform: setup: self.setups: ", self.setups)
         print("In Transform: type(items)", type(items))
         return self.setups(getattr(items, 'train', items) if train_setup else items)
 

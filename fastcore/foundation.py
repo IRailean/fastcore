@@ -327,6 +327,7 @@ class L(CollBase, metaclass=NewChkMeta):
     "Behaves like a list of `items` but can also index with list of indices or masks"
     _default='items'
     def __init__(self, items=None, *rest, use_list=False, match=None):
+        print("In L")
         if rest: items = (items,)+rest
         if items is None: items = []
         if (use_list is not None) or not _is_array(items):
