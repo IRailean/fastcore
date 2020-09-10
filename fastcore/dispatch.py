@@ -76,7 +76,6 @@ class _TypeDict:
 class TypeDispatch:
     "Dictionary-like object; `__getitem__` matches keys of types using `issubclass`"
     def __init__(self, funcs=(), bases=()):
-        print("In TypeDispatch: funcs ", funcs, " bases ", bases)
         self.funcs,self.bases = _TypeDict(),L(bases).filter(is_not(None))
         for o in L(funcs): self.add(o)
         self.inst = None
@@ -99,15 +98,12 @@ class TypeDispatch:
 
     def _attname(self,k): return getattr(k,'__name__',str(k))
     def __repr__(self):
-        print("In TypeDispatch: __repr__")
         r = [f'({self._attname(k)},{self._attname(l)}) -> {getattr(v, "__name__", v.__class__.__name__)}'
              for k in self.funcs.d for l,v in self.funcs[k].d.items()]
         r = r + [o.__repr__() for o in self.bases]
-        print("In TypeDispatch: __repr__: finished ok")
         return '\n'.join(r)
 
     def __call__(self, *args, **kwargs):
-        print("In TypeDispatch: __call__")
         ts = L(args).map(type)[:2]
         f = self[tuple(ts)]
         if not f: return args[0]
