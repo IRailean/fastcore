@@ -98,7 +98,7 @@ class Transform(metaclass=_TfmMeta):
         train_setup = train_setup if self.train_setup is None else self.train_setup
         print("In Transform: train_setup ", train_setup)
         print("In Transform: setup: self.setups type ", type(self.setups), " type self ", type(self))
-        print("In Transform: type(items)", type(items))
+        print("In Transform: type(items)", type(items), " call getattr(items, 'train', items)", getattr(items, 'train', items))
         return self.setups(getattr(items, 'train', items) if train_setup else items)
 
     def _call(self, fn, x, split_idx=None, **kwargs):
