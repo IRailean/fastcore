@@ -660,6 +660,7 @@ defaults.cpus = num_cpus()
 
 # Cell
 def add_props(f, g=None, n=2):
+    print("add_props f", f, " g", g, " n", n)
     "Create properties passing each of `range(n)` to f"
     if g is None: return (property(partial(f,i)) for i in range(n))
     return (property(partial(f,i), partial(g,i)) for i in range(n))
