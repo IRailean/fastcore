@@ -47,7 +47,7 @@ class NewChkMeta(FixSigMeta):
         if not args and not kwargs and x is not None and isinstance(x,cls):
             x._newchk = 1
             return x
-        print("In NewChkMeta: cls is ", cls)
+        print("In NewChkMeta: cls is ", cls, " x is ", x, " args ", args, " kwargs ", kwargs)
         res = super().__call__(*((x,) + args), **kwargs)
         res._newchk = 0
         return res
