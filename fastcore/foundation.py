@@ -47,10 +47,7 @@ class NewChkMeta(FixSigMeta):
         if not args and not kwargs and x is not None and isinstance(x,cls):
             x._newchk = 1
             return x
-        print("In NewChkMeta: cls is ", cls, " x is ", x, " args ", args, " kwargs ", kwargs)
-        print("In NewChkMeta: super ", super(), " super().__call__", super().__call__)
         res = super().__call__(*((x,) + args), **kwargs)
-        print("In NewChkMeta res ", res)
         res._newchk = 0
         return res
 
@@ -342,7 +339,6 @@ class L(CollBase, metaclass=NewChkMeta):
     @property
     def _xtra(self): return None
     def _new(self, items, *args, **kwargs): 
-        print("In L: _new: self is ", type(self))
         return type(self)(items, *args, use_list=None, **kwargs)
     def __getitem__(self, idx): return self._get(idx) if is_indexer(idx) else L(self._get(idx), use_list=None)
     def copy(self): return self._new(self.items.copy())

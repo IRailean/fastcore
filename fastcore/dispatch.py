@@ -79,7 +79,6 @@ class TypeDispatch:
         self.funcs,self.bases = _TypeDict(),L(bases).filter(is_not(None))
         for o in L(funcs): self.add(o)
         self.inst = None
-        print("In TypeDispatch: __init__ finished ok")
 
     def add(self, f):
         "Add type `t` and function `f`"
