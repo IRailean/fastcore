@@ -84,7 +84,7 @@ class Transform(metaclass=_TfmMeta):
     @property
     def name(self): return getattr(self, '_name', _get_name(self))
     def __call__(self, x, **kwargs): 
-        print("In Transform: __call__")
+        print("In Transform: __call__ self is ", self)
         return self._call('encodes', x, **kwargs)
     def decode  (self, x, **kwargs): 
         print("In Tranfsorm: decode")
