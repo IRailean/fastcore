@@ -220,7 +220,7 @@ class Pipeline:
     def setup(self, items=None, train_setup=False):
         print("In Pipeline: in setup")
         tfms = self.fs[:]
-        print("In Pipeline: in setup: tfms ", tfms)
+        print("In Pipeline: in setup: tfms ", [t.name for t in tfms])
         self.fs.clear()
         for t in tfms: self.add(t,items, train_setup)
 
