@@ -105,9 +105,7 @@ class Transform(metaclass=_TfmMeta):
         if not _is_tuple(x):
             if f is None: return x
             ret = f.returns_none(x) if hasattr(f,'returns_none') else None
-            print("In Transform: _do_call: type ", type(f), " f", f, " self type", type(self))
             return retain_type(f(x, **kwargs), x, ret)
-        print("In Transform: _do_call: type ", type(f), " f", f, " self type", type(self))
         res = tuple(self._do_call(f, x_, **kwargs) for x_ in x)
         return retain_type(res, x)
 
