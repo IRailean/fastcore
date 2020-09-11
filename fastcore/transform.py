@@ -115,7 +115,9 @@ class Transform(metaclass=_TfmMeta):
             return retain_type(f(x, **kwargs), x, ret)
         res = tuple(self._do_call(f, x_, **kwargs) for x_ in x)
         print("In Transform: _do_call res", res)
-        return retain_type(res, x)
+        y = retain_type(res, x)
+        print("In Transform: _do_call output y", y)
+        return y
 
 add_docs(Transform, decode="Delegate to <code>decodes</code> to undo transform", setup="Delegate to <code>setups</code> to set up transform")
 
