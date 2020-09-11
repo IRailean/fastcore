@@ -62,6 +62,7 @@ def _get_name(o):
 # Cell
 def _is_tuple(o): return isinstance(o, tuple) and not hasattr(o, '_fields')
 
+import inspect 
 # Cell
 class Transform(metaclass=_TfmMeta):
     "Delegates (`__call__`,`decode`,`setup`) to (<code>encodes</code>,<code>decodes</code>,<code>setups</code>) if `split_idx` matches"
@@ -87,6 +88,8 @@ class Transform(metaclass=_TfmMeta):
         print("In Transform: __call__ ")
         if self.name:
             print("In Transform: calling function ", self.name)
+        curframe = inspect.currentframe()
+        print(inspect.getouterframes(curframe, 5))
         return self._call('encodes', x, **kwargs)
     def decode  (self, x, **kwargs): 
         print("In Tranfsorm: decode")
