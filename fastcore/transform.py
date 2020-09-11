@@ -107,11 +107,14 @@ class Transform(metaclass=_TfmMeta):
         return self._do_call(getattr(self, fn), x, **kwargs)
 
     def _do_call(self, f, x, **kwargs):
+        print("In Transform: _do_call f", f, " x", x)
         if not _is_tuple(x):
             if f is None: return x
             ret = f.returns_none(x) if hasattr(f,'returns_none') else None
+            print("In Transform: _do_call ret", ret)
             return retain_type(f(x, **kwargs), x, ret)
         res = tuple(self._do_call(f, x_, **kwargs) for x_ in x)
+        print("In Transform: _do_call res", res)
         return retain_type(res, x)
 
 add_docs(Transform, decode="Delegate to <code>decodes</code> to undo transform", setup="Delegate to <code>setups</code> to set up transform")
