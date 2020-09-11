@@ -87,7 +87,7 @@ class Transform(metaclass=_TfmMeta):
     def __call__(self, x, **kwargs): 
         print("In Transform: __call__ ")
         if self.name:
-            print("In Transform: calling function ", self.name, " function tfms ", self)
+            print("In Transform: calling function ", self.name, " inspect source ", inspect.getsource(self))
         curframe = inspect.currentframe()
         print(inspect.getouterframes(curframe, 5))
         return self._call('encodes', x, **kwargs)
